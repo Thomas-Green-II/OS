@@ -37,6 +37,10 @@ compare-object (get-content C:\Users\ctf\downloads\new.txt) (get-content C:\User
 Check to see if there is a profile under AllUsersAllHosts
 Test-Path -Path $PROFILE.AllUsersAllHosts
 
+Malware is running in a PowerShell profile on the File-Server. 
+Based on PowerShell profile order of precedence (what is read first), find the correct flag.
+cat $PROFILE.AllUsersAllHosts
+
 
 thgr-M-006
 
