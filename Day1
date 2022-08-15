@@ -1,0 +1,24 @@
+command to get into the windows opstation = xfreerdp /u:student /v:<ip> /dynamic-resolution +glyph-cache +clipboard
+
+If there is a pipe in a list of processes that is bad
+
+Cim <------ Categorized classes of objects
+
+WINDOWS POWERSHELL REMOTING
+get-PSSessionConfiguration     <------ Tells us who has permissio to do remote management
+NT Authority = Kernel
+
+winrm get winrm/config    <------ Displays the WinRM configuration
+
+WSMan     <----- used because windows does not trust any other device
+Get-Item WSMan:\localhost\client\TrustedHosts                                         <------- Query trusted hosts
+Set-Item WSMan:\localhost\Client\TrustedHosts -Value "Server01"                       <------- Adding a single item to TrustedHosts
+Set-Item WSMan:\localhost\Client\TrustedHosts -Value "Server01,Server02,127.0.0.1"    <------- Adding multiple items
+Set-Item WSMan:\localhost\Client\TrustedHosts -Value "Server03" -Concatenate          <------- Appends the Value instead of changing it
+
+
+Invoke-Command <--------- not a remoting command. This is how to remotely run a command one time before ending the session
+Invoke-Command -ComputerName File-Server {Get-Service}                                 <----- Creates 1-to-1 Temporary Session
+Invoke-Command -ComputerName File-Server,Domain-Controll,Workstation2 {Get-Service} -asjob <------ Running a Temporary Session as a Job
+Invoke-Command -ComputerName File-Server,Domain-Controll,Workstation2 c:\windows\findevil.ps1  <------ runs our script on several computers at the same time
+Receive-Job <job #>                                                                    <----- Displays the job's Results
