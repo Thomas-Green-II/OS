@@ -22,3 +22,24 @@ Invoke-Command -ComputerName File-Server {Get-Service}                          
 Invoke-Command -ComputerName File-Server,Domain-Controll,Workstation2 {Get-Service} -asjob <------ Running a Temporary Session as a Job
 Invoke-Command -ComputerName File-Server,Domain-Controll,Workstation2 c:\windows\findevil.ps1  <------ runs our script on several computers at the same time
 Receive-Job <job #>                                                                    <----- Displays the job's Results
+
+
+PowerShell doesn't have a native cmdlet that will give you processor information (such as get-processor or get-cpu). 
+Knowing this information might be necessary. 
+What command would give you information about the system's processor?
+Get-CimInstance -Class CIM_Processor 
+
+
+Find the only line that makes the two files in the CTF user's Downloads folder different.
+compare-object (get-content C:\Users\ctf\downloads\new.txt) (get-content C:\Users\ctf\downloads\old.txt)
+
+
+Check to see if there is a profile under AllUsersAllHosts
+Test-Path -Path $PROFILE.AllUsersAllHosts
+
+
+thgr-M-006
+
+M22006
+
+10.50.32.16     stack 11
