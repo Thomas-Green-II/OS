@@ -1,4 +1,8 @@
-                                                          WINDOWS REGISTRY 
+What PowerShell command will list permissions of a file?
+get-acl
+                                                        
+                                                        
+                                                        WINDOWS REGISTRY 
                                          hierarchical database that stores system and user settings
 
 Keys - are known as Registry Hives and can contain subkeys and values.
