@@ -1,16 +1,33 @@
 WINDOWS REGISTRY   <------hierarchical database that stores system and user settings
 
 
+Keys - are known as Registry Hives and can contain subkeys and values.
+Subkeys - can contain subkeys and values
+Values - contain data in specific formats.
 
+Example of Keys, Subkeys, and Values:
+HKEY_Local_Machine (HIVE)
+              ├──SOFTWARE (Key)
+              ├──BCD00000 (Key)
+              ├──HARDWARE (Key)
+              └──SYSTEM   (Key)
+                      └──RegisteredApplications (Subkey)
+                                        ├── File Explorer : Data (value)
+                                        ├── Paint : Data (value)
+                                        └──Wordpad : Data (value)
 
+There are five Registry Hives (groups of keys and thier associated values that are loaded when the system is started or a specific user logs in)
+HKEY_LOCAL_MACHINE    <------- configuration information for the entire computer
+HKEY_USERS            <------- all user profiles on the system
+HKEY_CURRENT_USERS    <------- copy of the logged in user’s registry key based on thier SID (session ID) from HKEY_USERS.
+HKEY_CURRENT_CONFIG   <------- 
+HKEY_CLASSES_ROOT     <------- 
 
-
-
-
-
-
-
-
+new-item "hklm:\software\classes" -name ".fuk" -Force -ErrorAction  silentlycontinue  <------- Adding a new key/subkey to the Registry
+new-itemproperty "hklm:\software\classes\.fuk" -Name '(Default)' -PropertyType String -Value 'exefile' -Force -ErrorAction silentlycontinue   
+----- Adding default value to key
+new-itemproperty "hklm:\software\classes\.fuk" -Name 'Content Type' -PropertyType String -Value 'application/x-msdownload' -Force -ErrorAction silentlycontinue 
+----- dding Content Type to the key
 
 
 
