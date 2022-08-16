@@ -92,6 +92,10 @@ Create a new string value in utilman.exe called Debugger, modify it so that it r
 gets persistence as the logged in user when running utilman, then when locking the screen, using the actual utilman to privilege escalate
 
 
+What suspicious user profile, found in the registry, has connected to this machine?
+get-childitem "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList"
+
+
 
 
                                                        WINDOWS FILE SYSTEM
