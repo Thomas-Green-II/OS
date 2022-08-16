@@ -1,3 +1,5 @@
+https://os.cybbh.io/public/os/latest/index.html <---- Public book
+
 command to get into the windows opstation = xfreerdp /u:student /v:<ip> /dynamic-resolution +glyph-cache +clipboard
 
 If there is a pipe in a list of processes that is bad
@@ -42,6 +44,8 @@ Based on PowerShell profile order of precedence (what is read first), find the c
 cat $PROFILE.AllUsersAllHosts
 
 
+
+http://10.50.22.25:8000/
 thgr-M-006
 
 M22006
