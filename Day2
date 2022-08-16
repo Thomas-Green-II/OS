@@ -1,5 +1,5 @@
-WINDOWS REGISTRY   <------hierarchical database that stores system and user settings
-
+                                                          WINDOWS REGISTRY 
+                                         hierarchical database that stores system and user settings
 
 Keys - are known as Registry Hives and can contain subkeys and values.
 Subkeys - can contain subkeys and values
@@ -18,6 +18,7 @@ HKEY_Local_Machine (HIVE)
 
 
 There are five Registry Hives (groups of keys and thier associated values that are loaded when the system is started or a specific user logs in)
+
 **HKEY_LOCAL_MACHINE    <------- configuration information for the entire computer
 BCD000000000 <----- Boot configuration for windows
 Hardware     <----- List of Hardware devices connected to the machine/ Drivers
@@ -26,13 +27,22 @@ Security     <----- Helps determine rights and access to the systen
 Software     <----- System wide software (installing chrome for the entire computer rather than just your local account)
 Sytem        <----- Startup that deals with boot or driver
 
+
 **HKEY_USERS            <------- all user profiles on the system
-Users with the sid of 1002 and above are added users.
+S-1-5-18 refers to LocalSystem account
+S-1-5-19 refers to LocalService account and it runs local services that do not require LocalSystem account.
+S-1-5-20 refers to NetworkService account and it runs network services that do not require LocalSystem account.
+S-1-5-21 refers to a comain account
+HKEY_USERS\S-1-5-21-3939661428-3032410992-3449649886-XXXX
+XXXX = RID
+Users with the Rid of 1002 and above are added users.
 Windows 7 and below set 500 to Admin
 1000 and 1001 are Hidden Admin and Hidden Administrator accounts
 
+
 **HKEY_CURRENT_USERS    <------- copy of the logged in user’s registry key based on thier SID (Security Identifier) from HKEY_USERS.
 Symbolic link to your account settings
+
 
 **HKEY_CURRENT_CONFIG   <------- Current configuration loadded in the Windows Registry
 
@@ -47,6 +57,41 @@ new-itemproperty "hklm:\software\classes\.fuk" -Name 'Content Type' -PropertyTyp
 
 
 
+NTUSER.dat = stores the user settings
+System32 Config = stores the System settings
+RegBack = Backup to the registry
 
 
-WINDOWS FILE SYSTEM
+
+                                                   MANIPULATING WINDOWS REGISTRY
+Regedit.exe will allow you to query a key via GUI
+
+red.exe will allow you to query a key via Command Line
+reg.exe in the command line is ony really useful for importing and exporting, use Regededit.exe in the search bar instead
+Example of reg.exe to query a key:
+reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+
+Powershell also allows you to do this using Get-item
+get-item HKLM:\
+get-childitem HKLM:\     <----- gets all the subkeys of HKLM
+set-ItemProperty -path HKML:\Software\Microsoft\Windows\CurrentVersion\Run\ -Name malware -value "Im_innocent"    <----- makes a new item
+
+Get-PSDrive    <----- See mounted drives
+
+New-PSDrive -Name HKU -PSProvider Registry -Root HKEY_Users     <------ Adds drive to save time so you don't have to continue querying the old drive
+add-content -value "New-PSDrive -Name HKU -PSProvider Registry -Root HKEY_Users" $profile.AllUsersAllHosts  <----- Saves the new drive to the All $profile
+&$profile.AllUsersAllHosts      <------ Executes
+Get-PSDrive                     <----- Verify the PSDrive was added
+get-Item -path HKU:\*\Software\Microsoft\Windows\CurrentVersion\Run     <----- Grabs every instance of users from the HKU drive 
+
+
+Image File Eecution Options   <----- useful for debugging
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Eecution Options
+create a new key called utilman.exe, which also means 'help'
+Create a new string value in utilman.exe called Debugger, modify it so that it runs c:\windows\system32\cmd.exe
+gets persistence as the logged in user when running utilman, then when locking the screen, using the actual utilman to privilege escalate
+
+
+
+
+                                                       WINDOWS FILE SYSTEM
