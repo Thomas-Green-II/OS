@@ -95,3 +95,33 @@ gets persistence as the logged in user when running utilman, then when locking t
 
 
                                                        WINDOWS FILE SYSTEM
+Windows native data stream is NTFS
+Files consists of attributes, security settings, mainstreams and alternate streams. Only the mainstream is visible by default.
+
+Example of an alternate data stream
+
+C:\windows\system32>echo social security numbers > good.txt:secret.info     <------the colon hides the data stream 
+C:\windows\system32>dir good.txt 
+ Directory of C:\windows\system32
+ 02/27/2021 07:13 PM                  23 good.txt
+                 1 File(s)            23 bytes
+                 0 Dir(s) 20,060,712,960 bytes free
+
+C:\windows\system32>type good.txt 
+Always try your best                                                            <------- This string was input from the file good.txt
+
+
+dir /R good.txt         <------ to find Alternate Data Streams in files
+notepad good.txt:secret.info    <------ allows you to edit the ADS
+
+
+
+                                                  Finding ADS with Powershell
+
+Get-Item reminder.txt -Stream *                     <----- find the ADS
+Get-Content reminder.txt -Stream secret.info        <----- echo the ADS
+
+get-childitem <path> | foreach-object { get-item $_.fullname -stream * } | where { $_.stream -ne ':$DATA' } | Get-content  <---- search for the content of
+an ADS
+
+
