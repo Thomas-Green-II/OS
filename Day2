@@ -16,18 +16,34 @@ HKEY_Local_Machine (HIVE)
                                         ├── Paint : Data (value)
                                         └──Wordpad : Data (value)
 
-There are five Registry Hives (groups of keys and thier associated values that are loaded when the system is started or a specific user logs in)
-HKEY_LOCAL_MACHINE    <------- configuration information for the entire computer
-HKEY_USERS            <------- all user profiles on the system
-HKEY_CURRENT_USERS    <------- copy of the logged in user’s registry key based on thier SID (session ID) from HKEY_USERS.
-HKEY_CURRENT_CONFIG   <------- 
-HKEY_CLASSES_ROOT     <------- 
 
+There are five Registry Hives (groups of keys and thier associated values that are loaded when the system is started or a specific user logs in)
+**HKEY_LOCAL_MACHINE    <------- configuration information for the entire computer
+BCD000000000 <----- Boot configuration for windows
+Hardware     <----- List of Hardware devices connected to the machine/ Drivers
+SAM          <----- Security account manager that conains the authentication hashes and tokens for each user
+Security     <----- Helps determine rights and access to the systen
+Software     <----- System wide software (installing chrome for the entire computer rather than just your local account)
+Sytem        <----- Startup that deals with boot or driver
+
+**HKEY_USERS            <------- all user profiles on the system
+Users with the sid of 1002 and above are added users.
+Windows 7 and below set 500 to Admin
+1000 and 1001 are Hidden Admin and Hidden Administrator accounts
+
+**HKEY_CURRENT_USERS    <------- copy of the logged in user’s registry key based on thier SID (Security Identifier) from HKEY_USERS.
+Symbolic link to your account settings
+
+**HKEY_CURRENT_CONFIG   <------- Current configuration loadded in the Windows Registry
+
+
+**HKEY_CLASSES_ROOT     <------- Symbolic Link
+Example of how to add a HKEY_CLASSES_ROOT:
 new-item "hklm:\software\classes" -name ".fuk" -Force -ErrorAction  silentlycontinue  <------- Adding a new key/subkey to the Registry
 new-itemproperty "hklm:\software\classes\.fuk" -Name '(Default)' -PropertyType String -Value 'exefile' -Force -ErrorAction silentlycontinue   
 ----- Adding default value to key
 new-itemproperty "hklm:\software\classes\.fuk" -Name 'Content Type' -PropertyType String -Value 'application/x-msdownload' -Force -ErrorAction silentlycontinue 
------ dding Content Type to the key
+----- Adding Content Type to the key
 
 
 
