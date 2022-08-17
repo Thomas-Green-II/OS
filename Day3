@@ -101,3 +101,7 @@ whereis apropos
 
 echo $0 <----- find the current shell
 cat /etc/shells <------ lets you know what shells are on the box
+
+find where the man page is for cat
+man --where cat
+/usr/share/man/man1/cat.1.gz
