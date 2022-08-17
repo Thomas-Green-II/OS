@@ -1,10 +1,74 @@
  ----------------------------------------Enumeration of a linux Machine--------------------------------------------------------------------------------
 
 Where am I? 
-  HostName/Uname -a
+  HostName/ Uname -a
 Who am I?
   whoami/id
 What Am I Allowed to do?
   sudo -l
 What is going on?
-  w/who/ps -elf
+  w/ who/ ps -elf
+What's that?
+  
+Why is that happening?
+  
+How is that happening?
+  
+What's in there?
+  
+
+-----------------------------------------Files------------------------------------------------------------------------------------------------------------
+
+/bin = binaries (commands)
+  (/usr/bin, /usr/local/bin)    <---- not all commands are found in just the /bin directory, depends on the linux box
+/sbin = system binaries (need sudo to use)
+  (/usr/bin)
+/home = default for a user's home directory
+/usr = universal system resources, used for any files to be used in the entire system
+/etc = everything configurabele, sort of the registry, but mainly a catch all for all system level configuration files
+/var = things that are likely to change; logs
+/boot = what's read and run at boot
+/dev = special device files (mouse,keyboard,sound devices, etc), you can determine the type pf file by the character in front of the permissions
+/lib = functions that are needed for applications to run and operate correctly
+/mnt = dedicated directory for external storage
+/media = removable media
+/opt = reservation for any file or applications that you install yourself as the user
+/run = run time and variable data, mounted at boot, holds information to that session of the computer running
+/tmp = temporary files, everyone has access, but only used for temporary persistence
+/proc = processes (whats displayed using ps -elf)
+
+
+----------------------------------------Users and Groups-------------------------------------------------------------------------------------------------
+
+/etc/password = holds all users on a system
+Field in order are as listed
+User name.
+Encrypted password.
+User ID number (UID)
+User's group ID number (GID)
+Full name of the user (GECOS)
+User home directory.
+Login shell.
+
+/etc/group
+groupname	         = Contains the name assigned to the group.
+group-password (x) = 	x in this field indicates that shadow passwords are used.
+GID	               = Contains the group’s GID number.
+username-list      =	List of users that are members of the group
+
+
+----------------------------------------------------Permissions------------------------------------------------------------------------------------------
+
+U                                                G                                                        O
+User                                             Group                                                    Other
+(Owner)                                          (Group specified)                                        (Any other person)
+
+750 = The owner can do everything, The group can read and execute, Everyone else can't do anything
+------------------------------------------------SUID and STICKY BIT--------------------------------------------------------------------------------------
+
+SUID(4000) = Runs by root rather than the current user (running the comand to change your password is done by the SUID)
+SGID(2000) = Same as SUID but a group rather than a user
+
+Sticky Bit(1000) = In a sharde directory, any file that has a sticky bit turned on can be deleted by the person who created the file
+
+find /-perm /2000 2>/dev/null -exec ls -la {} \;    <------ Look for files with the SGID persmission set
