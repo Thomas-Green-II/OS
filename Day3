@@ -117,3 +117,10 @@ File: home/garviel/numbers
 Use awk to print lines:
 >= 420 AND <=1337
 cat numbers | awk 'NR == 420,NR == 1337 '
+
+The flag resides in $HOME/paths... you just need to determine which flag it is. 
+The flag sits next to a string matching the name of a $PATH/binary on your system.
+echo $PATH | sed s/\:/\\n/g                               <------- replaces every ":" with a newline
+ls $(echo $PATH | sed s/\:/\\n/g) >> ~/bins               <------- Lists out every executable in the $PATHs and saves em to a file
+vim bins
+grep -Fwf bins paths                                      <------- grep what was inside the bins file for any matching strings in the paths file
