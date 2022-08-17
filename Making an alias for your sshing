@@ -1,0 +1,15 @@
+-----------------------------------------------Making an alias for your opstation------------------------------------------------------------------------
+vim .ssh/config
+Host linops
+    HostName 10.50.39.198
+    User student
+    Port 22
+chmod 600 .ssh/config
+ssh-keygen
+press enter until you get back to your original shell
+ssh-copy-id linops
+ssh linops, put in password
+You should be abl to ssh to linops without the password from now on
+vim .bash_aliases
+    alias sshops='ssh linops -X terminator&'
+source .bashrc
