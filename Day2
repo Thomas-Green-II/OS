@@ -2,7 +2,7 @@ What PowerShell command will list permissions of a file?
 get-acl
                                                         
                                                         
-                                                        WINDOWS REGISTRY 
+-------------------------------------------------------WINDOWS REGISTRY--------------------------------------------------------------------------------- 
                                          hierarchical database that stores system and user settings
 
 Keys - are known as Registry Hives and can contain subkeys and values.
@@ -67,7 +67,7 @@ RegBack = Backup to the registry
 
 
 
-                                                   MANIPULATING WINDOWS REGISTRY
+------------------------------------------------------ MANIPULATING WINDOWS REGISTRY--------------------------------------------------------------------
 Regedit.exe will allow you to query a key via GUI
 
 red.exe will allow you to query a key via Command Line
@@ -102,7 +102,7 @@ get-childitem "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList"
 
 
 
-                                                       WINDOWS FILE SYSTEM
+-----------------------------------------------------------WINDOWS FILE SYSTEM--------------------------------------------------------------------------
 Windows native data stream is NTFS
 Files consists of attributes, security settings, mainstreams and alternate streams. Only the mainstream is visible by default.
 
