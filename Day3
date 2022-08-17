@@ -1,0 +1,10 @@
+ ----------------------------------------Enumeration of a linux Machine--------------------------------------------------------------------------------
+
+Where am I? 
+  HostName/Uname -a
+Who am I?
+  whoami/id
+What Am I Allowed to do?
+  sudo -l
+What is going on?
+  w/who/ps -elf
