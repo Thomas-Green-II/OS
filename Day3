@@ -112,3 +112,8 @@ find /dir/path/look/up -name "dir-name-here"
 
 find all hidden files
 find -type f -name ".*"
+
+File: home/garviel/numbers
+Use awk to print lines:
+>= 420 AND <=1337
+cat numbers | awk 'NR == 420,NR == 1337 '
