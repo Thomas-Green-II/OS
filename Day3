@@ -15,7 +15,22 @@ Why is that happening?
 How is that happening?
   
 What's in there?
-  
+
+Gives all the ip addresss, interfaces, mac addresses, etc on the system 
+ifconfig / ip addr /ip a 
+
+What ports are open?
+netstat -ntlp / ss -ntlp    <----- n = numeric ports rather than the service (ex. 80 instead of http)
+
+What routes are there?
+route / ip route / ip r      <------ What interfaces are being used to get to which networks
+
+Has this machine talked to someone?
+arp / ip neigh / ip n        <------ stale = has talked to at one point            Reachable = Has talked to recently
+
+Firewalls?
+iptables -L
+
 
 -----------------------------------------Files------------------------------------------------------------------------------------------------------------
 
@@ -74,7 +89,7 @@ Sticky Bit(1000) = In a sharde directory, any file that has a sticky bit turned 
 find /-perm /2000 2>/dev/null -exec ls -la {} \;    <------ Look for files with the SGID persmission set
 
 
--------------------------------------commands------------------------------------------------------------------------------------------------------------
+-------------------------------------Commands------------------------------------------------------------------------------------------------------------
 man -k <keyword>  =  looks for keywords in the man page to find a command
                       ^
 apropos --------------|
@@ -84,4 +99,5 @@ whereis -b  <----- just locating the binary
 whereis apropos
 >  /usr/bin/apropos /usr/share/man/man1/apropos.1.gz
 
-
+echo $0 <----- find the current shell
+cat /etc/shells <------ lets you know what shells are on the box
