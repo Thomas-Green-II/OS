@@ -72,3 +72,16 @@ SGID(2000) = Same as SUID but a group rather than a user
 Sticky Bit(1000) = In a sharde directory, any file that has a sticky bit turned on can be deleted by the person who created the file
 
 find /-perm /2000 2>/dev/null -exec ls -la {} \;    <------ Look for files with the SGID persmission set
+
+
+-------------------------------------commands------------------------------------------------------------------------------------------------------------
+man -k <keyword>  =  looks for keywords in the man page to find a command
+                      ^
+apropos --------------|
+
+whereis     <-----     locate binary/source files
+whereis -b  <----- just locating the binary
+whereis apropos
+>  /usr/bin/apropos /usr/share/man/man1/apropos.1.gz
+
+
