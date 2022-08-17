@@ -119,7 +119,8 @@ C:\windows\system32>type good.txt
 Always try your best                                                            <------- This string was input from the file good.txt
 
 
-dir /R good.txt         <------ to find Alternate Data Streams in files
+dir /R good.txt         <------ to find Alternate Data Streams in files in command line
+gci -force              <------ find ADS in Powershell
 notepad good.txt:secret.info    <------ allows you to edit the ADS
 
 
