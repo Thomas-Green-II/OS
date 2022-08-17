@@ -109,3 +109,6 @@ man --where cat
 
 find a directory by its keyword
 find /dir/path/look/up -name "dir-name-here"
+
+find all hidden files
+find -type f -name ".*"
