@@ -133,4 +133,5 @@ Get-Content reminder.txt -Stream secret.info        <----- echo the ADS
 get-childitem <path> | foreach-object { get-item $_.fullname -stream * } | where { $_.stream -ne ':$DATA' } | Get-content  <---- search for the content of
 an ADS
 
+get-childitem $pwd -recurse | foreach-object { get-item $_.fullname -stream * } | where { $_.stream -ne ':$DATA' } | Get-content <--- Gets all hidden files
 
