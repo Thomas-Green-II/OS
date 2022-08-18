@@ -74,3 +74,14 @@ Hundreds of Processes in User Subsystem Session 1 and up are started automatical
 -Spawn explorer.exe as the customized graphical environment.  
   
   
+------------------------------------------------------BCDEDIT-------------------------------------------------------------------------------------------
+To check if the system is BIOS or UEFI 
+  - bcdedit | findstr /i winload
+  > winload.exe = BIOS, winload.efi = UEFI
+  
+  Check if hibernation occured
+  - bcdedit | findstr /i winresume
+  >                                     <---- if nothing then no
+
+
+
