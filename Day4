@@ -1,19 +1,15 @@
 --------------------------------------------------WINDOWS BOOT PROCESS------------------------------------------------------------------------------------
 
 Why we learn about the Windows Boot Process:
-Rootkits- a type of malware that hides itself and other applications. A rootkit typically runs in kernel mode, so it has the same privileges as the operating
-system and can sometimes start before it. Because traditionally, anti-malware software doesn’t load until after the kernel and boot drivers do, 
-rootkits often exploit weaknesses in the startup process:
 
-Firmware Rootkits-  overwrite the PC’s BIOS or other hardware firmware so the rootkit can start before the OS even loads
-
-Bootkits-  replace the OS bootloader to load the bootkit before the OS
-
-Kernel rootkits-  replace a portion of the OS kernel so the rootkit can start when the OS loads
-
-Driver rootkits-  pretend to be a boot driver that the OS uses to communicate with PC
-
-Avenues of Attack-  An exposed operating system can be easily used to further Offensive goals such as pivots or compromised to steal data
+- Rootkits-           a type of malware that hides itself and other applications. A rootkit typically runs in kernel mode, so it has the same privileges 
+                      as the operating system and can sometimes start before it. Because traditionally, anti-malware software doesn’t load until after 
+                      the kernel and boot drivers do, rootkits often exploit weaknesses in the startup process:
+- Firmware Rootkits-  overwrite the PC’s BIOS or other hardware firmware so the rootkit can start before the OS even loads
+- Bootkits-           replace the OS bootloader to load the bootkit before the OS
+- Kernel rootkits-    replace a portion of the OS kernel so the rootkit can start when the OS loads
+- Driver rootkits-    pretend to be a boot driver that the OS uses to communicate with PC
+- Avenues of Attack-  An exposed operating system can be easily used to further Offensive goals such as pivots or compromised to steal data
 
 
 BIOS Master Boot Record (BIOS MBR)          VS.           UEFI GUID Partition Table (UEFI GPT)
@@ -50,6 +46,9 @@ Windows Boot Order:
 System Idle Process shows you how much you have left remaining
   
 svchost <---- service that runs all services
+
+
+--------------------------------------------------------------WINDOWS LOGON PROCESS---------------------------------------------------------------------
 
 Look at public slideshow for logon process (slide 10/11)
 
