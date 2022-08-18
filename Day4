@@ -1,3 +1,50 @@
 --------------------------------------------------WINDOWS BOOT PROCESS------------------------------------------------------------------------------------
+Rootkits- a type of malware that hides itself and other applications. A rootkit typically runs in kernel mode, so it has the same privileges as the operating
+system and can sometimes start before it. Because traditionally, anti-malware software doesn’t load until after the kernel and boot drivers do, 
+rootkits often exploit weaknesses in the startup process:
+
+Firmware Rootkits-  overwrite the PC’s BIOS or other hardware firmware so the rootkit can start before the OS even loads
+
+Bootkits-  replace the OS bootloader to load the bootkit before the OS
+
+Kernel rootkits-  replace a portion of the OS kernel so the rootkit can start when the OS loads
+
+Driver rootkits-  pretend to be a boot driver that the OS uses to communicate with PC
+
+Avenues of Attack-  An exposed operating system can be easily used to further Offensive goals such as pivots or compromised to steal data
 
 
+BIOS Master Boot Record (BIOS MBR)          VS.           UEFI GUID Partition Table (UEFI GPT)
+     (first 512 bytes)   
+
+BIOS and UEFI are the same thing with minor differences
+  - firmware that ensures critical hardware like Hard Drives, Display Adapters, and SDRAM(Synchronous dynamic random-access memory) work properly
+  - UEFI Boots much faster than BIOS systems
+  - UEFI Firmware is usually loaded into flash memory or EEPROM, making it easier to update and patch
+  - UEFI offers SECURED BOOT mode which only allows verified drivers to load
+  - UEFI offers drive support of up to 9 zettabytes, while BIOS only works with 2 terabytes
+
+The MBR contains Disk Partitions
+  - contains code that starts the first stage of loading an Operating System, called a Boot Loader
+  
+  
+ To check if the system is BIOS or UEFI 
+  - bcdedit | findstr /i winload                                OR                                Look at msinfo in the search bar
+  > winload.exe = BIOS, winload.efi = UEFI                                        Legacy means the system is UEFI compatible but running in BIOS mode
+  
+  
+  After the bootloader executes, is when the OS starts to load
+  
+  
+  Windows Boot Order: 
+  Starts at POST
+  
+  BIOS ----> MBR ----> Volume Boot Sector ------> Bootloader NTLDR.exe (kernel 5) ----> Boot.ini ----> NTOSKRNL
+                                          \
+                                            ----> Bootloader Bootmgr.exe (kernel 6+) ----> BCD ----> OS loader Winload.exe/Winresume.exe ----> NTOSKRNL
+                                              
+  UEFI ----> GUID Partition Table -----> Boot Manager (Bootmgrfw.efi, kernel 6+) -------> BCD ----> OS loader Winload.efi/Winresume.efi ----> NTOSKRNL
+  
+  
+  
+  
