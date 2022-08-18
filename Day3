@@ -124,3 +124,4 @@ echo $PATH | sed s/\:/\\n/g                               <------- replaces ever
 ls $(echo $PATH | sed s/\:/\\n/g) >> ~/bins               <------- Lists out every executable in the $PATHs and saves em to a file
 vim bins
 grep -Fwf bins paths                                      <------- grep what was inside the bins file for any matching strings in the paths file
+(Use a 'o' as well to just output the results)
