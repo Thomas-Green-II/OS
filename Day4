@@ -47,6 +47,8 @@ System Idle Process shows you how much you have left remaining
   
 svchost <---- service that runs all services
 
+SAS = Ctrl+Alt+Del
+
 
 --------------------------------------------------------------WINDOWS LOGON PROCESS---------------------------------------------------------------------
 
@@ -81,7 +83,22 @@ To check if the system is BIOS or UEFI
   
   Check if hibernation occured
   - bcdedit | findstr /i winresume
-  >                                     <---- if nothing then no
+  >                                     <---- if nothing results, then there was no hibernation
 
+bcdedit will show you the windows boot manager and the windows boot loader
 
+bcdedit /set description "Windows 930"   <------ change the description of the bcdedit
+
+bcdedit /set safeboot minimal <------- makes every boot start with safe mode
+
+bcdedit /set safeboot Network <------- sets safemode to network?
+
+bcdedit /set safebootalternateshell yes  <------ safeboot alternate shell allows you to add more shells than powershell and the commandprompt
+
+bcdedit /deletevalue safemode    <----- delete the value safeboot
+bcdedit /deletevalue safebootalternateshell   <----- delete the value
+
+msconfig, boot, uncheck Safe Boot, apply   <----- turns off safeboot
+
+msconfig, services, hide micosoft services, uncheck services you dont want running, apply       <------ keep the box running normally
 
