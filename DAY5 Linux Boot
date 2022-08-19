@@ -1,1 +1,27 @@
+----------------------------------------------------------LINUX BOOT PROCESS-------------------------------------------------------------------------------
+Look at the FG for chart on Boot Process
+
+
+SYSV
+- BIOS - Basic Input Output System, Loads and runs the boot loader
+- MBR - 
+- GRUB
+- Kernel
+- Init
+- RunLevels
+
+
+
+
+
+SYSTEMD
+
+
+
+
+
+
+
+
+
 
