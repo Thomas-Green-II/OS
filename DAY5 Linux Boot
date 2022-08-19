@@ -82,6 +82,12 @@ cat /lib/systemd/system/default.target | tail -n 8   <---- shows the requirement
          /etc/systemd/system  <----- Users created services
          /lib/systemd/system  <------ system and package 
          /user/lib/systemd/system <------ system and package
+         
+systemctl list-dependencies graphical.target  <--- Shows all of the dependencies (green = active,white = inactive,red = error) to find wants and requires
+systemctl show -p Wants graphical.target  <---- shows wants 
+systemctl list-unit-files  <---- list units (scopes, services, anything that can be referenced)
+systemctl cat graphical .target  <---- tells you the location of the target, and gives the same t as cat /lib/systemd/system/default.target | tail -n 8
+
 
 A Partition is 16 bytes
 
