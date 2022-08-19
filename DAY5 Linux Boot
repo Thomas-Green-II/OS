@@ -79,7 +79,9 @@ ls -l /etc/rc#.d   <----- checks runlevel #, if running something other than an 
 ls -lisa /lib/systemd/system/default.target     <---- get your current default target (SystemD)
 cat /lib/systemd/system/default.target | tail -n 8   <---- shows the requirements and wants of the default target (SystemD)
                                                            requires = other targets        wants = service                Allowisolate = Switch Targets?
-
+         /etc/systemd/system  <----- Users created services
+         /lib/systemd/system  <------ system and package 
+         /user/lib/systemd/system <------ system and package
 
 A Partition is 16 bytes
 
