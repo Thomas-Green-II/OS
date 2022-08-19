@@ -14,13 +14,13 @@ Look at the FG for chart on Boot Process
          - Mounts the root '/' filesystem
 - Init - Sets the rest of the system processes in motion using pre-conigured runlevels
        - /sbin/init is hardcoded for backwards compatability
-       - /etc/inittab is the configuration file for init
+       - /etc/inittab is the configuration file for init (SysV)
        - Service and process manager
-       - The entire startup proccess is handled by /etc/init.d
+       - The entire startup proccess is handled by /etc/init.d (SysV)
           - Scripts that ruun 'S'tart and 'K'ill scripts out of applicable rc folders
 - RunLevels - Software Configuration where only a select group of processes exist
           0 - Halt
-          1 - Single User
+          1 - Single User (Root)
           2 - Multi User - Without netwroking
           3 - Multi User - Networking
           4 - Multi User - Custom Configurations
@@ -43,7 +43,15 @@ SYSTEMD
 parallel
 ini-like files
 system.conf
-targets
+Targets - Like Runlevels but better
+          poweroff.target - Shuts down and powers off system
+          rescue.target   - Configures a rescue shell session
+          multi-user.target - no network services
+          multi-user.target - with network services
+          multi-user.target - with network services
+          graphical target - GUI
+          reboot.target - shuts down and restarts
+          
 
 
 
@@ -65,6 +73,13 @@ ls -l /sbin/init    <----- determines which init system you are using
 ps -p1   <------ determines which init system you are using
 
 cat /etc/inittab   <----- check system init config (SysV only)
+
+ls -l /etc/rc#.d   <----- checks runlevel #, if running something other than an init.d service, then it is probably malicious
+
+ls -lisa /lib/systemd/system/default.target     <---- get your current default target (SystemD)
+cat /lib/systemd/system/default.target | tail -n 8   <---- shows the requirements and wants of the default target (SystemD)
+                                                           requires = other targets        wants = service                Allowisolate = Switch Targets?
+
 
 A Partition is 16 bytes
 
