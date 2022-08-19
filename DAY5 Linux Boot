@@ -2,26 +2,69 @@
 Look at the FG for chart on Boot Process
 
 
-SYSV
 - BIOS - Basic Input Output System, Loads and runs the boot loader
-- MBR - 
-- GRUB
-- Kernel
-- Init
-- RunLevels
+- MBR - Master Boot Record
+- GRUB - Grand unified Bootloader
+       - Config File is /boot/grub/men.lst
+       - boot/grub/grub.cfg
+       - os selection screen where if no choice is made, default kernel specified in the grub configuration file (boot/grub/grub.cfg)
+- Kernel - Initializes the devices and its drivers, mounts the root filesystem, PID 0, starts init with a PID of 1
+         - Manages interactions between OS and Hardware
+         - Has modules = Extensions that allow the kernel to communicate to Hardware
+         - Mounts the root '/' filesystem
+- Init - Sets the rest of the system processes in motion using pre-conigured runlevels
+       - /sbin/init is hardcoded for backwards compatability
+       - /etc/inittab is the configuration file for init
+       - Service and process manager
+       - The entire startup proccess is handled by /etc/init.d
+          - Scripts that ruun 'S'tart and 'K'ill scripts out of applicable rc folders
+- RunLevels - Software Configuration where only a select group of processes exist
+          0 - Halt
+          1 - Single User
+          2 - Multi User - Without netwroking
+          3 - Multi User - Networking
+          4 - Multi User - Custom Configurations
+          5 - Multi User - Networking and GUI
+          6 - reboot
+           
 
+INIT(SysV)
+1983
+serial
+scripts
+inittab
+runlevels
 
 
 
 
 SYSTEMD
+2010
+parallel
+ini-like files
+system.conf
+targets
 
 
 
 
 
+COMMANDS
 
+df -h   <----- Command to find all the disks
 
+sudo xxd -l 512 -g 1 /dev/sda   <------ Gets the hex of a disk file
+sudo dd if=/dev/sda of=MBRcopy bs=1 count=512     <------ copy 512 bytes of the disk file to a new file called MBRcopy
+file MBRcopy <------ ensure it is a DOS/MBR boot sector
 
+cat /boot/grub/grub.cfg  <----- to see the grub file
 
+lsmod <----- list kernel modules
+
+ls -l /sbin/init    <----- determines which init system you are using
+ps -p1   <------ determines which init system you are using
+
+cat /etc/inittab   <----- check system init config (SysV only)
+
+A Partition is 16 bytes
 
