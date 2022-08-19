@@ -86,8 +86,20 @@ cat /lib/systemd/system/default.target | tail -n 8   <---- shows the requirement
 systemctl list-dependencies graphical.target  <--- Shows all of the dependencies (green = active,white = inactive,red = error) to find wants and requires
 systemctl show -p Wants graphical.target  <---- shows wants 
 systemctl list-unit-files  <---- list units (scopes, services, anything that can be referenced)
-systemctl cat graphical .target  <---- tells you the location of the target, and gives the same t as cat /lib/systemd/system/default.target | tail -n 8
+systemctl cat graphical .target  <---- tells you the location of the target, and gives the same result as cat /lib/systemd/system/default.target | tail 8
 
+
+-------------------------------------------------/etc/environment    vs   /etc/profile------------------------------------------------------------------
+/etc/environment = on boot, global
+/etc/profile = user logs in, system-wide, and its correlated $HOME file, used for interactive login shells USED FOR PERSISTANCE
+/etc/bash.bashrc = systemwide configuration files, $HOME/bashrc, used for interactive nonlogin shells
 
 A Partition is 16 bytes
 
+
+
+
+
+
+minas-tirith is SysV
+Terra is SystemD
