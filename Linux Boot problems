@@ -4,3 +4,7 @@ dd if=/home/bombadil/mbroken of=stuff.txt bs=1 count=16 skip=446
 
 Identify the file symbolically-linked to init on the SystemD init machine.
 ls -l /sbin/init
+
+
+What is the full path to the binary used for standard message logging?
+man -k 'syslog'
