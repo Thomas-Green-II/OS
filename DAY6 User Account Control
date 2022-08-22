@@ -1,1 +1,22 @@
+The popup that states "are you sure... blah blah blah" is User Account Control (UAC)
+UAC is a GUI Service
 
+
+"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"  <---- UAC Registry Key
+
+Color coded consent prompts
+Red - Application or publisher blocked by group policy
+Blue & gold - Administrative application
+Blue - Trusted and Authenticode signed application
+Yellow - Unsigned or signed but not trusted application
+
+
+
+get-item HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+  - enableLUA   <---- subkey to see if UAC is enabled (1 is yes)
+  
+  ./sigcheck -m C:\Windows\System32\slui.exe -accepteula | Select-String -SimpleMatch "level" <--- Needs Sysinternals to run
+  ./strings C:\Windows\System32\*.exe -accepteula | select-string -SimpleMatch "autoelevate"  <--/ 
+  
+  
+  Before Secure Desktop, you could run as administrator just by clicking out of the UAC
