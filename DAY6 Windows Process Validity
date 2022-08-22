@@ -8,11 +8,12 @@ Used to find out if the processes running on the machine are the same ones that 
 
 Process <------- requires interaction to execute
 Service <------- Runs on the background quietly 
-DLL     <------- Library that contains pointers to resources available for other programs to interact with
+DLL     <------- Library that contains pointers to resources available for other programs to interact with. Happen when you manipulate handles
 
 C:\Windows\System32 <------- Where the system processes and services normally run from
 
-
+command line is the arguments being passed to service host telling it to launch the service by its service name not its display name
+if svchost -k is present it is a legit service, 99% of the time
 
 
 
@@ -39,14 +40,29 @@ Get-Ciminstance Win32_service | Select Name, Processid, Pathname
 How do we discover Normal, abnormal, and Hidden Processes and Services?
 Get-Process SMSS,CSRSS,LSASS | Sort -Property Id
 
+See the handles
+get-process -Name lsass | select -ExpandProperty modules | out-file $home\desktop\handles.txt -width 4096
+get-process -Name lsass | select -ExpandProperty modules | format-table -wrap    <---- what are the handles for lsass
+get-ciminstance win32_process | where {$_.Name -like "*LSASS*"} | Select *
+
 Do boot processes have descriptions?
 Get-Process | Select Name, Id, Description | Sort -Property Id
 
-
-Get-ProAre Priority Levels of processes important?
-Gess | Select Name, Priorityclass
+Are Priority Levels of processes important?
+Get-Process | Select Name, Priorityclass
 Tasklist /m
 
+How would malware use Schedule Task?
+schtasks /query | more
+Get-ScheduledTask | Select * | Select -First 5
 
+
+get-service  <----- get the services
+sc.exe   <----- service controller
+sc.exe showsid Power   <------ every service should have a SID
+sc.exe showsid "Windows Powers"    <------ does give you a sid, but you have to use the service name not what you see it as.
+svchost.exe -k NetworkService -s <----- loads the service group rather than just a service
+sc.exe queryrex type=service state=inactive <------ see what services are inactive
+sc.exe queryrex type=service <------ shows us what services are active
 
 
