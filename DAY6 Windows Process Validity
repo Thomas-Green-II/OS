@@ -95,7 +95,7 @@ autoruns64.exe  <---- reads the registry, detects what starts automatically
  - red - Network connection terminated
  - Green - Connection was made
  handles - sysinternals tool for handles
- check permissions for a file, google find effective permissions (what permissions the file uses to execute), sysinternals 
+ AccessChk <----- find effective permissions (what permissions the file uses to execute), sysinternals 
 
 
 
