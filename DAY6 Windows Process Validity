@@ -1,1 +1,52 @@
+A process is a program that executes
+
+dll injection - Not stored on a disk, but it is strored in memory
+
+
+------------------------------------------------Process Validitty-------------------------------------------------------------------------------------------
+Used to find out if the processes running on the machine are the same ones that the binary called, are they legit processes?
+
+Process <------- requires interaction to execute
+Service <------- Runs on the background quietly 
+DLL     <------- Library that contains pointers to resources available for other programs to interact with
+
+C:\Windows\System32 <------- Where the system processes and services normally run from
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------COMMANDS-------------------------------------------------------------------------------------
+
+tasklist <------- How to find all processes on windows
+get-process <---/ 
+get-ciminstance win32_process  <------- The CIM that deals with processes
+get-ciminstance win32_process | select *  <------- grabs every process with more information 
+get-ciminstance win32_process | select * -first  <------ grabs the first process with a lot of information
+task manager <------ GUI to look at tasks and processes
+
+Get-Process | Select Name, Id, Path
+Get-Ciminstance Win32_service | Select Name, Processid, Pathname
+
+How do we discover Normal, abnormal, and Hidden Processes and Services?
+Get-Process SMSS,CSRSS,LSASS | Sort -Property Id
+
+Do boot processes have descriptions?
+Get-Process | Select Name, Id, Description | Sort -Property Id
+
+
+Get-ProAre Priority Levels of processes important?
+Gess | Select Name, Priorityclass
+Tasklist /m
+
+
+
 
