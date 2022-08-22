@@ -15,18 +15,20 @@ C:\Windows\System32 <------- Where the system processes and services normally ru
 command line is the arguments being passed to service host telling it to launch the service by its service name not its display name
 if svchost -k is present it is a legit service, 99% of the time
 
+scheduled task <------ run by task scheduler, form of persistance, can be set up based on time and/or criteria set
 
+If its not in the root directory, you have to specify where the scheduled task is
+Do not expand Microsoft for this class
 
+Conhost = Commandline/Powershell
 
-
-
-
-
+At logon time = any users logon 
 
 
 
 ---------------------------------------------------------------COMMANDS-------------------------------------------------------------------------------------
 
+PROCESSES
 tasklist <------- How to find all processes on windows
 get-process <---/ 
 get-ciminstance win32_process  <------- The CIM that deals with processes
@@ -52,6 +54,8 @@ Are Priority Levels of processes important?
 Get-Process | Select Name, Priorityclass
 Tasklist /m
 
+
+SERVICES
 How would malware use Schedule Task?
 schtasks /query | more
 Get-ScheduledTask | Select * | Select -First 5
@@ -64,5 +68,36 @@ sc.exe showsid "Windows Powers"    <------ does give you a sid, but you have to 
 svchost.exe -k NetworkService -s <----- loads the service group rather than just a service
 sc.exe queryrex type=service state=inactive <------ see what services are inactive
 sc.exe queryrex type=service <------ shows us what services are active
+
+
+SCHEDULED TASKS
+schtasks  <----- look at scheduled tasks
+schedtasts.exe /query /tn "\Mcrosoft\Xb1GameSave\Xb1GameSavetask"  <----- powershell shtasks, query one named Xb1GameSavetask
+schedtasts.exe /query /tn "\Mcrosoft\Xb1GameSave\Xb1GameSavetask" /v /fo list   <----- list the information in a list
+task scheduler <----- GUI for scheduled tasks
+
+
+schtasks.exe /query /tn "Kaspersky Antivirus" /v /fo list    <----- query a protection service to see why the service is running
+
+STATIC NETWORK CONNECTIONS
+netstat -anob <------ check network connections, with the processid that was used
+get-nettcpconnections <------ powershell version of netstat
+
+
+SYSINTERNALS 
+process explorer (procexp64.exe) <--- tool that gives you processes runnning, allows you to suspend a process, rather than killing it (right click the process)
+process monitor (procmon.exe) <---- tool that is used for monitoring processes, used to find a bootkit (GUI Tool, not ommandline)
+autoruns64.exe  <---- reads the registry, detects what starts automatically
+ - Pink -digital signature could not be verified
+ - Green - Matches previous set
+ - Yellow - Entry exists but nothing is there
+ tcpview.exe <----- gives a netstat-like network listing, but it is dynamic so it constantly refreshes
+ - red - Network connection terminated
+ - Green - Connection was made
+ handles - sysinternals tool for handles
+ check permissions for a file, google find effective permissions (what permissions the file uses to execute), sysinternals 
+
+
+
 
 
