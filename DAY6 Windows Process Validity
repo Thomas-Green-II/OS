@@ -24,6 +24,7 @@ Conhost = Commandline/Powershell
 
 At logon time = any users logon 
 
+MpsSvc <---- Service name for windows Firewall
 
 
 ---------------------------------------------------------------COMMANDS-------------------------------------------------------------------------------------
