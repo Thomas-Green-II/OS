@@ -113,3 +113,7 @@ sudo lsof -c sshd <---- look at the process via name rather than PID
 
 pstree -p <------ gets the tree of processes
 
+
+Examine the process list to find the ssh process. Then, identify the symbolic link to the absolute path for its executable in the /proc directory.
+The flag is the absolute path to the symbolic link, and the file it is linked to.
+/proc/1612/exe,/usr/sbin/sshd
