@@ -20,6 +20,31 @@ Effective user ID (euid) <----- defines the access rights for a process.
 Real user ID (ruid), indicates who initiated a process, defines the user that can interact with the running process—most significantly
 Users can only modify / interact with files /process that they own or have been shared with them.
 
+System Call <---- interaction between a process and the kernel
+System calls used for process startup:
+fork() When a process calls fork(), the kernel creates a nearly identical copy of the process.
+exec() When a process calls exec(program), the kernel starts program, replacing the current process.
+
+ls example 
+shell  ----> fork()  -----> shell
+                         |
+                          -> copy of shell -----> exec(ls)  ----> ls
+                          
+Capital CRON signifies there is a cronjob running
+Cron jobs are a standard method of scheduling tasks to run on your server
+
+orphan process   <-----  process that had a parent process that dies, but was adopted by Systemd or init
+Every daemon is an orphan, nt every orphan is a daemon
+(Daemons are background processes/services)
+
+zombie proces <----- completed process, but still has an entry in the process table, waiting on parent to acknowledge or terminate
+Can't be killed unless the parent process is killed
+
+After viewing the processes, each process has a single letter in the S(State) field;
+S - Sleeping Process
+R - Running Process
+Z - Zombie Process
+
 
 
 
@@ -42,4 +67,7 @@ shows cpus
 press f5 to change it to tree view
 to add fields, press f2 and select columns
 press f10 to finalize your setup
+
+
+disown -a && exit <------ Close a shell/terminal and force all children to be adopted
 
