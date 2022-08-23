@@ -86,6 +86,7 @@ cat /lib/systemd/system/default.target | tail -n 8   <---- shows the requirement
 systemctl list-dependencies graphical.target  <--- Shows all of the dependencies (green = active,white = inactive,red = error) to find wants and requires
 systemctl show -p Wants graphical.target  <---- shows wants 
 systemctl list-unit-files  <---- list units (scopes, services, anything that can be referenced)
+systemctl list-units --all --type service  <----- list all services on a systemd
 systemctl cat graphical .target  <---- tells you the location of the target, and gives the same result as cat /lib/systemd/system/default.target | tail 8
 
 
