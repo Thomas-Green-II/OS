@@ -30,8 +30,16 @@ shell  ----> fork()  -----> shell
                          |
                           -> copy of shell -----> exec(ls)  ----> ls
                           
+
 Capital CRON signifies there is a cronjob running
 Cron jobs are a standard method of scheduling tasks to run on your server
+The cron daemon checks three directories every minute nd executes and commands needed to be run:
+/var/spool/cron   (User cron jobs)
+/etc/cron.d
+/etc/crontab    (System cron jobs)
+crontab jobs run with the permissions of the owner of the crontab file
+
+
 
 orphan process   <-----  process that had a parent process that dies, but was adopted by Systemd or init
 Every daemon is an orphan, nt every orphan is a daemon
@@ -45,7 +53,11 @@ S - Sleeping Process
 R - Running Process
 Z - Zombie Process
 
+Malicious processes are sometimes orphaned and named to make it look like a daemon process:
+‘ps --ppid 1 -lf'
 
+
+Socket <----- IP and a port 
 
 
 ---------------------------------------------------------COMMANDS-------------------------------------------------------------------------------------------
@@ -58,6 +70,8 @@ ps -Nlf --ppid 2 --forest | grep -B # ps   <-------- Use the -B for before to se
 ps -Nlf --ppid 2 --forest | grep -A # ps   <-------- Use the -A for after to see the # of lines after your search 
 ps -Nlf --ppid 2 --forest | grep --context # ps <------- use the --context for before and after to see the # of lines around your search
 
+kill -9 <PID>’ or ‘pkill -9 <process name>’
+
 top   <------ Shows an active list of processes
 use the spacebar to select other fields you want to be included and use the escape key to actually use them
 shift V gives the tree view of the processes
@@ -68,6 +82,31 @@ press f5 to change it to tree view
 to add fields, press f2 and select columns
 press f10 to finalize your setup
 
+‘ps --ppid 1 -lf' <-------- See all orphaned processes
 
 disown -a && exit <------ Close a shell/terminal and force all children to be adopted
+
+jobs  <---- Display List of Jobs running in the background
+kill %<job number> <---  Terminate the process by job number
+
+kill -l  <----- list all the kill signals that can be sent
+
+crontab  <------ create user cron jobs
+crontab -e  <----- edit cron jobs
+crontab -l  <---- list cron jobs
+crontab -lu <---- list other users jobs
+sudo crontab -e -u <---- edit other peoples cron jobs
+/var/spool/cron/crontabs/ <----- check the file with the user's username for their specific cron jobs
+
+la /proc   <---- gets all the processes and their PIDs 
+la/proc/18880  <----- look at the whats linked to the process with the PID of 18880
+
+lsof <---- lists all the open files for processes on the system
+sudo lsof -p 18880 <---- look at all the files that are open for your ssh process
+only worry about the numbered file descriptors;
+ - file descriptor 0-2, in,out,error
+sudo lsof -c sshd <---- look at the process via name rather than PID
+ 
+
+
 
