@@ -109,7 +109,7 @@ only worry about the numbered file descriptors;
 sudo lsof -c sshd <---- look at the process via name rather than PID
  
  systemctl list-units --all --type timer  <----- check for timers
- systemctl list-units --all --type services <---- list all services
+ systemctl list-units --all --type service <---- list all services
 
 
 
