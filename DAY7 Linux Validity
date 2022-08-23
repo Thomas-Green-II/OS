@@ -39,6 +39,7 @@ The cron daemon checks three directories every minute nd executes and commands n
 /etc/crontab    (System cron jobs)
 crontab jobs run with the permissions of the owner of the crontab file
 
+Another way to check for reoccuring events is to check for timers
 
 
 orphan process   <-----  process that had a parent process that dies, but was adopted by Systemd or init
@@ -107,6 +108,8 @@ only worry about the numbered file descriptors;
  - file descriptor 0-2, in,out,error
 sudo lsof -c sshd <---- look at the process via name rather than PID
  
+ systemctl list-units --all --type timers  <----- check for timers
+ systemctl list-units --all --type services <---- list all services
 
 
 
