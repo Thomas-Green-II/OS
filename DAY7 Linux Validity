@@ -1,1 +1,45 @@
+What's that?
+
+
+Why is that happening?
+
+
+How is that happening?
+
+
+What's in there?
+
+
+
+Bracketed processes are kernel processes (IE [kthreadd])
+
+Kernel space processes have acces to everything, and share memory; if it dies it could break your system
+User space processes do not share memory an therefor if one dies your system will be okay
+
+Effective user ID (euid) <----- defines the access rights for a process.
+Real user ID (ruid), indicates who initiated a process, defines the user that can interact with the running process—most significantly
+Users can only modify / interact with files /process that they own or have been shared with them.
+
+
+
+
+---------------------------------------------------------COMMANDS-------------------------------------------------------------------------------------------
+
+ps -elf <------ shows every (e) process as a snapshot 
+
+ps -Nlf --ppid 2  <----- any process that does Not (N) have the parent process id of 2
+ps -Nlf -ppid 2 --forest <----- shows process trees for processes that don't have the parent process id of 2
+ps -Nlf --ppid 2 --forest | grep -B # ps   <-------- Use the -B for before to see the # of lines before your search 
+ps -Nlf --ppid 2 --forest | grep -A # ps   <-------- Use the -A for after to see the # of lines after your search 
+ps -Nlf --ppid 2 --forest | grep --context # ps <------- use the --context for before and after to see the # of lines around your search
+
+top   <------ Shows an active list of processes
+use the spacebar to select other fields you want to be included and use the escape key to actually use them
+shift V gives the tree view of the processes
+
+htop - needs to be installed to use
+shows cpus
+press f5 to change it to tree view
+to add fields, press f2 and select columns
+press f10 to finalize your setup
 
