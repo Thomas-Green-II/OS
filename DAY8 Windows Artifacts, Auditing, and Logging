@@ -129,8 +129,9 @@ logs the version of powershell, when it launches, and enables script block loggi
 
 
 
-
-
+BAM settings are stored in different registry locations based on the version of Windows 10. What version of Windows 10 is workstation2 running? 
+The answer is the 4 digit Windows 10 release (version) number.
+reg query 'HKEY_LOCAL_MACHINE\software\microsoft\Windows NT\currentversion'
 
 
 
