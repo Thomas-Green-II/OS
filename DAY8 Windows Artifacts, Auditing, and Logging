@@ -128,6 +128,11 @@ logs the version of powershell, when it launches, and enables script block loggi
 
 
 
+Figure out the last access time of the hosts file.
+Get-ChildItem -Path C:\ -Include '*hosts*' -File -Recurse -ErrorAction SilentlyContinue
+(Get-Item C:\Windows\System32\drivers\etc\hosts).lastaccesstime
+
+
 
 BAM settings are stored in different registry locations based on the version of Windows 10. What version of Windows 10 is workstation2 running? 
 The answer is the 4 digit Windows 10 release (version) number.
