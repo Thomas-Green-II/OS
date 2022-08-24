@@ -54,7 +54,7 @@ Get-ChildItem -Path 'C:\Windows\Prefetch' -ErrorAction Continue | select * | sel
 JUMP LIST
 Allows users to “jump” or access items they have frequently or recently used quickly and easily
 What files were recently/frequently accessed?
-gci -Recurse C:\Users\*\AppData\Roaming\Microsoft\Windows\Recent -ErrorAction Continue | select FullName, LastAccessTime, CreationTime | ft wrap
+gci -Recurse C:\Users\*\AppData\Roaming\Microsoft\Windows\Recent -ErrorAction Continue | select LastAccessTime, CreationTime, Fullname | ft wrap
 gc 'filepath of wanted file' <------ shows the location of where it was ran from
 
 
@@ -64,7 +64,7 @@ RECENT FILES
 Registry Key that will track the last files and folders opened and is used to populate data in “Recent” menus of the Start menu
 
 List Files in Recent Docs
-gci 'REGISTRY::HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs'
+gci 'REGISTRY::HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.*'
 
 Convert File Hex to Unicode
 [System.Text.Encoding]::Unicode.GetString((gp "REGISTRY::HKEY_USERS\*\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.txt")."0")
@@ -87,7 +87,7 @@ Find FQDNs in Sqlite Text Files
 $History = (Get-Content 'C:\users\<username>\AppData\Local\Google\Chrome\User Data\Default\History') -replace "[^a-zA-Z0-9\.\:\/]",""   <---- Variable Sub
 $History| Select-String -Pattern "(https|http):\/\/[a-zA-Z_0-9]+\.\w+[\.]?\w+" -AllMatches|foreach {$_.Matches.Groups[0].Value}| ft  <---- using the variable
 
-
+$History = (Get-Content 'C:\users\*\AppData\Local\Google\Chrome\User Data\Default\History') -replace "[^a-zA-Z0-9\.\:\/]",""
 
 -------------------------------------------------AUDITING------------------------------------------------------------------------------------------------
 
@@ -111,7 +111,7 @@ To view logs use the GUI WIndows Event Viewer
 
 Powershell
 Find a message based on a keyword
-Get-EventLog -logname security -message "*remote*" | ft wrap 
+Get-EventLog -logname security -message "*remote*" | ft -wrap 
 
 View newest 10 System Logs
 Get-EventLog -LogName System -Newest 10
@@ -143,5 +143,8 @@ reg query 'HKEY_LOCAL_MACHINE\software\microsoft\Windows NT\currentversion'
 
 Get-ChildItem 'C:\$RECYCLE.BIN' -Recurse -Force | ForEach-Object {if ( ($_.extension) -like ".txt") {if ($_.Name -like "`$R*") { Write-host $_.Name -NoNewline
 ; Write-Host " -->" -ForeGroundColor Green -NoNewline ; get-content $_.fullname }}}
+
+
+
 
 
