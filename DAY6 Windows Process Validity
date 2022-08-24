@@ -103,4 +103,7 @@ What command-line (cmd) command will show all services, running or not running?
 sc queryex type=service state=inactive
 
 
+What registry subkey holds a service's .dll location?
+Parameters
+
 
