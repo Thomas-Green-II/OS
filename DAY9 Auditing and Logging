@@ -114,7 +114,9 @@ last -f /var/log{wtmp,btmp} <----------- Needed to view data files
 xpath 
 xpath -e 'query' <file>
 
-
+xpath for multiple queries
+xpath -e 'query1 | query2' <file>
+EXAMPLE: xpath -e '//@addr | //@portid' output.xml
 
 
 
