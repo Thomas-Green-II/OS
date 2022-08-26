@@ -118,5 +118,16 @@ xpath for multiple queries
 xpath -e 'query1 | query2' <file>
 EXAMPLE: xpath -e '//@addr | //@portid' output.xml
 
+Select every IP address with open (in use) ports using XPATH queries and XPATH axes.
+xpath -q -e '//@portid/ancestor::host/address/@addr | //@portid ' output.xml | md5sum
+
+jq
+cat <file> | jq '.'      <------- formats the file "pretty printed"
+
+look for a specific value in a file, only grab uniq values, and count how many there are
+EXAMPLE jq '."id.orig_h"' conn.log | sort | uniq | wc -l
+
+Use jq to locate and count connections where the destination IP sent more than 40 bytes to the source IP.
+EXAMPLE jq '. | select(."resp_ip_bytes">40) | .resp_ip_bytes' conn.log | wc -l
 
 
