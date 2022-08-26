@@ -1,6 +1,7 @@
 https://os.cybbh.io/public/os/latest/index.html <---- Public book
 
 command to get into the windows opstation = xfreerdp /u:student /v:<ip> /dynamic-resolution +glyph-cache +clipboard
+                            Admin Station = xfreerdp /u:andy.dwyer /v:<ip> /dynamic-resolution +glyph-cache +clipboard
 
 If there is a pipe in a list of processes that is bad
 
