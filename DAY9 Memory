@@ -1,0 +1,134 @@
+Volatile Memory
+Non-persistent
+Requires power to maintain the stored information
+EXAMPLE: RAM
+
+
+Non-Volatile Memory
+Persistent
+Does not require a continuous power
+EXAMPLES: HDD, USB
+
+
+MEMORY ANALYSIS
+Analyzing a system’s RAM to determine information about running programs, the operating system, and the overall state of a computer
+
+
+
+ORDER OF VOLATILITY - THE HALFLIFE OF DATA
+1. CPU registers, cache
+2. Routing table, ARP cache, process table, kernel stats, memory
+3. Temporary file systems    <--------- windows\temp or /tmp
+4. Disk    <----- information exists until the disk is destroyed
+5. Remote logging and monitoring data    <-------------- Now youre off the system so its unlikely the information will chnge when you turn the computer off
+6. Physical configuration, network topology
+7. Archival media - backups    <---------    Only chnage as you add to them 
+
+
+VOLATILITY
+Volatility provides cross-platform solutions on Windows, Mac OSX, and Linux
+Each operating system has its own memory acquisition tool called Persistent Memory (pmem):
+Linpmem
+Winpmem
+OSXpmem
+
+
+PROFILES
+
+
+
+.\volatility_2.6_win64_standalone.exe
+
+-h 
+                        help
+                        
+-f FILENAME, --filename=FILENAME
+                        Filename to use when opening an image
+--profile=WinXPSP2x86
+                        Name of the profile to load (use --info to see a list
+                        of supported profiles)
+--plugins=PLUGINS     Additional plugin directories to use (semi-colon
+                        separated)
+multiple plugins are separated by a ;
+
+
+get profile from the plugin:
+imageinfo       Identify information for the image
+
+EXAMPLE
+.\volatility_2.6_win64_standalone.exe -f ".\cridex.vmem" imageinfo
+INFO    : volatility.debug    : Determining profile based on KDBG search...
+          SUGGESTED PROFILES(S) : WinXPSP2x86, WinXPSP3x86 (Instantiated with WinXPSP2x86)
+                     AS Layer1 : IA32PagedMemoryPae (Kernel AS)
+                     AS Layer2 : FileAddressSpace (C:\Users\andy.dwyer\Desktop\Memory Analysis\cridex.vmem)
+                      PAE type : PAE
+                           DTB : 0x2fe000L
+                          KDBG : 0x80545ae0L
+          Number of Processors : 1
+     Image Type (Service Pack) : 3
+                KPCR for CPU 0 : 0xffdff000L
+             KUSER_SHARED_DATA : 0xffdf0000L
+           Image date and time : 2012-07-22 02:45:08 UTC+0000
+     Image local date and time : 2012-07-21 22:45:08 -0400
+
+.\volatility_2.6_win64_standalone.exe -f ".\cridex.vmem" --profile=WinXPSP2x86 pslist    <------ list of processes using the profile given
+
+                                                                               pstree  <------ gives a tree of processes using the profile
+                                                                               
+                                                                               psscan  <----- physicl memory addresses of processes
+                                                                               dlllist  <----- list the dlls being used
+                                                                               dlldump <----- grab the dll
+                                                                               hivedump  <----- dump a registry hive
+                                                                               hivelist   <-----  list registry hives
+                                                                               
+ 
+ procdump        Dump a process to an executable file sample
+ 
+EXAMPLE
+.\volatility_2.6_win64_standalone.exe -f ".\cridex.vmem" --profile=WinXPSP2x86 procdump -p 1640 -D .   <------ dump the process to the current directory
+Volatility Foundation Volatility Framework 2.6
+Process(V) ImageBase  Name                 Result
+---------- ---------- -------------------- ------
+0x81e7bda0 0x00400000 reader_sl.exe        OK: executable.1640.exe
+
+get-filehash .\executable.1640.exe
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          5B136147911B041F0126CE82DFD24C4E2C79553B65D3240ECEA2DCAB4452DCB5       C:\Users\andy.dwyer\Desktop\Memory Analysis\execut...
+
+Run the hash against VirusTotal.com
+
+.\volatility_2.6_win64_standalone.exe -f ".\cridex.vmem" --profile=WinXPSP2x86 memdump -p 1640 -D .   <-------- see what it was doing
+
+net use * \\live.sysinternals.com\tools   <------ use the sysinternals without changing directories
+
+z:\strings.exe -accepteula "1640.dmp" > 1640.txt   <---- Use the drive that sysinternals was saved to before strings.exe, and save the dump to a text file
+
+use notepadd++ on th file to sift through the strings (you can use regex)
+
+
+
+
+
+.\volatility_2.6_win64_standalone.exe -f ".\cridex.vmem" --profile=WinXPSP2x86 connections  <------ check if its making connections
+Volatility Foundation Volatility Framework 2.6
+Offset(V)  Local Address             Remote Address            Pid
+---------- ------------------------- ------------------------- ---
+0x81e87620 172.16.112.128:1038       41.168.5.140:8080         1484
+
+ 
+ 
+ 
+ 
+ 
+ .\volatility_2.6_win64_standalone.exe -f ".\cridex.vmem" --profile=WinXPSP2x86 connscan  <------ Gives all connections made with the vmem
+ 
+Offset(P)  Local Address             Remote Address            Pid
+---------- ------------------------- ------------------------- ---
+0x02087620 172.16.112.128:1038       41.168.5.140:8080         1484
+0x023a8008 172.16.112.128:1037       125.19.103.198:8080       1484
+
+
+Use ip location on google to search where the Remote IPs are
+
+
