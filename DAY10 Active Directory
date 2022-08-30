@@ -59,4 +59,11 @@ get-ADUser -filter * -property * | where { $_.PasswordNotRequired -eq $true } | 
 Find disabled accounts
 Search-ADaccount -accountDisabled | select name
 
+Find expired accounts
+search-ADaccount -accountexpired | select name 
 
+Find accounts that are set to expire
+search-ADaccount -accountexpiring | select name
+
+get-ADUser -filter * -properties * | where { $_.<property> -like "*<pattern>_to_match>*" } | select name <whatever property>
+ROT13 Encoded
