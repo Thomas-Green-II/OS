@@ -1,0 +1,62 @@
+Grup nesting
+When creating a group, adding people to that group will give those people the restrictions in the group
+Adding those same people to a separate group allows them to have more permissions than originally planned
+
+
+
+Grab the required services for a domain controller, and the state that they are in to ensure they are running
+gwmi win32_service | where { $_.name -like "adws" -or $_.name -like "kdc" -or $_.name -like "netlogon" -or $_.name -like "dns" } | select name,state,status
+
+Get the domain controller information
+Get-ADDomainController
+
+Get the information for the domain called army.warriors
+Get-addomain army.warriors
+
+Get the forest information for the domain army.warriors
+Get-adforest army.warriors
+
+Make sure the NETLOGON and SYSVOL are shared for the domain controller
+Get-SmbShare
+
+Load the active directory module
+get-module ActiveDirectory
+
+Get all the commands used for the active directory module
+Get-Command -module activedirectory
+
+
+get-ADGroup -filter * | select name, GroupCategory, GroupScope
+
+Look for the group member called domain admins
+get-ADGroupmember -identity "domain Admins"
+
+Find more
+get-ADGroupmember -identity "domain Admins" -recursive
+
+
+
+GROUP POLICY OBJECT QUERIES
+gpresult
+Get-GPResultantSetOfPolicy
+
+
+Get users for the active directory
+Get-ADUser
+Add a user to the active directory
+New-ADUser -Name "Bad Guy" -PasswordNotRequired 1 -Path "OU=3RD LPT,OU=CCO,OU=3RDBN,OU=WARRIORS,DC=ARMY,DC=WARRIORS"
+1 = yes
+0 = no
+
+get-ADUser -filter * -property * | select -first 1   <------ get all the information for the first user
+
+get the user that has reversible password encryption
+get-ADUser -filter * -property * | where { $_.AllowReversiblePasswordEncryption -eq $true } | select name
+
+Get the users that don't need a password to login 
+get-ADUser -filter * -property * | where { $_.PasswordNotRequired -eq $true } | select name
+
+Find disabled accounts
+Search-ADaccount -accountDisabled | select name
+
+
