@@ -110,6 +110,12 @@ Make sure you have sysinternals
 
 
 PROFILES
+AllUsersAllHosts
+AllUsersCurrentHost
+CurrentUserAllHosts
+CurrentUserCurrentHost
+
+
 Check to see if there is a profile under AllUsersAllHosts
 Test-Path -Path $PROFILE.AllUsersAllHosts
 
