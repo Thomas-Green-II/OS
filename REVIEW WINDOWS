@@ -1,0 +1,27 @@
+USE POWERSHELL AND SYSINTERNALS
+
+
+DOWNLOADING SYSINTERNALS
+Open powershell
+net use * \\live.sysinternals.com\tools
+get-PSDrive    <------ find the drive that sysinternals was downloaded on
+
+
+
+Look for pattern ports and unknown ports
+.\tcpview
+netstat -anob
+get-nettcpconnection
+
+
+Get the processes and their IDs/Paths
+get-process svchost | select name, id, path
+Use ProcExplorer/ProcMonitor
+.\procmon
+.\procexp
+Task Manager
+
+
+Refer back to the artifacts day
+
+
