@@ -106,3 +106,7 @@ History will record the access to the file on the website that was accessed via 
 Make sure you have sysinternals
 .\strings.exe 'C:\Users\<username>\AppData\Local\Google\Chrome\User Data\Default\History'
 
+
+
+
+
