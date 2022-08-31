@@ -25,7 +25,7 @@ If you notice an odd port you can investigate using top/htop/ps -elf
 
 htop tree view
 If PID of 1 look for services /lib/systemd/system /etc/systemd/system
-For ps use --forest
+For ps -elf use --forest
 Persistence
 cronjobs
 
