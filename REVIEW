@@ -5,15 +5,16 @@ Process validity:
 Why is it happening?
 Where am I?
 Who am I?
-What can I do? sudo -l
+What can I do? <----------- sudo -l
 Whats going on?
 What is that?
 Why is that happening?
 How is that happening?
 Whats in there?
+SHOULD I RAISE MY HAND? <-------- YES
 
 
-Network
+NETWORK
 netstat
 sudo ss -ntlp
 n port number
@@ -43,7 +44,7 @@ init (system5)
 configuration files
 
 /etc/bash_rc     <------- interactive nonlogin shells
-/etc/profile <------ system wide file for interactive login shells
+/etc/profile     <------- system wide file for interactive login shells
 
 
 
