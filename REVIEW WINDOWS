@@ -22,6 +22,87 @@ Use ProcExplorer/ProcMonitor
 Task Manager
 
 
+
+
 Refer back to the artifacts day
 
+USERASSIST
+artifacts need the operator to use  SID (security ID) to dig in a user specific registry for enumeration. Do this by executing:
+get-wmiobject win32_useraccount | select name,sid (PowerShell)
+Get-LocalUser | select Name,SID (PowerShell)
+wmic useraccount get name,sid (CMD.EXE ONLY)
+
+
+   v    cipher both of these using cyberchef, rot13          v
+
+View executable Files ran on the machine
+Get-ItemProperty 'REGISTRY::HKEY_USERS\*\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\UserAssist\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\Count'
+
+View Shortcut files executed
+Get-ItemProperty 'REGISTRY::HKEY_USERS\*\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\UserAssist\{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}\Count'
+
+  ^    cipher both of these using cyberchef, rot13          ^
+
+
+
+WINDOWS BACKGROUND ACTIVITY MODERATOR (BAM) (GUI only, not commandline)
+Windows 1709-1803
+Get-Itemproperty 'HKLM:\SYSTEM\CurrentControlSet\Services\bam\UserSettings\*' 
+
+Windows 1809 and newer
+Get-Itemproperty 'HKLM:\SYSTEM\CurrentControlSet\Services\bam\state\UserSettings\*' 
+
+
+
+
+RECYCLE BIN
+Important location for artifacts on a windows system because its where people throw things away.
+Get-ChildItem 'C:\$RECYCLE.BIN' -Recurse -Verbose -Force | select *
+Get-ChildItem 'C:\$RECYCLE.BIN' -Recurse -Force
+You should always see a desktop.ini file signifying it is on the desktop
+$R files will contain the contents of deleted files, and the $I files contain where the file was located. If they are for the same file the last
+six digits of the filename and the extension will be the same
+
+
+
+
+PREFETCH (Check this one first) 
+Created by the windows operating system when an application is run from a specific location for the first time
+Keeps a copy of the entire binary
+Get-ChildItem -Path 'C:\Windows\Prefetch' -ErrorAction Continue | select * | select -first 5
+
+
+
+
+JUMP LIST
+Allows users to “jump” or access items they have frequently or recently used quickly and easily
+What files were recently/frequently accessed?
+gci -Recurse C:\Users\*\AppData\Roaming\Microsoft\Windows\Recent -ErrorAction Continue | select LastAccessTime, CreationTime, Fullname | ft wrap
+gc 'filepath of wanted file' <------ shows the location of where it was ran from
+
+
+
+
+RECENT FILES
+Registry Key that will track the last files and folders opened and is used to populate data in “Recent” menus of the Start menu
+
+List Files in Recent Docs
+gci 'REGISTRY::HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.*'
+
+Convert File Hex to Unicode
+[System.Text.Encoding]::Unicode.GetString((gp "REGISTRY::HKEY_USERS\*\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.txt")."0")
+
+Convert all of a users values from HEX to Unicode
+Get-Item "REGISTRY::HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.txt" | select -Expand property | 
+ForEach-Object { [System.Text.Encoding]::Default.GetString((Get-ItemProperty -Path 
+"REGISTRY::HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.txt" -Name $_).$_)}
+
+
+
+
+BROWSER ARTIFACTS
+Stores details for each user account
+History will record the access to the file on the website that was accessed via a link
+Make sure you have sysinternals
+.\strings.exe 'C:\Users\<username>\AppData\Local\Google\Chrome\User Data\Default\History'
 
